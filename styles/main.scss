@@ -1,0 +1,111 @@
+$gold: gold;
+$green: green;
+$charcoal: #333333;
+$ivory:#BBBBBB;
+
+$arrowColor:$charcoal;
+$cycleColor:$green;
+
+$cycleTileDark:#335533;
+$cycleTileLight:#879687;
+
+$cycleTileDarkTransparent: rgba(51, 85, 51, 0.51);
+
+$arrow-width:20px;
+$arrow-height:15px;
+$arrow-point: 15px solid $arrowColor;
+$arrow-side: 20px solid transparent;
+$arrow-point-knockout:10px solid #545353;
+$arrow-side-knockout: 15px solid transparent;
+
+$board-border:1px solid #555555;
+
+$error-animation: 1s cubic-bezier(1, .56, 0, .59) both;
+
+body{
+    background:url(../img/bg.jpg);
+    background-size:cover;
+    margin:0;
+    padding:0;
+}
+
+#content {
+    width: 100%;
+    height: 100%;
+}
+
+#main {
+    text-align:center;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+.controls.btn-toolbar {
+    float:left;
+    margin:100px 0 0 20px;
+        
+    button.btn {
+        display:block;
+        font-size:24px;
+        margin-bottom:15px;
+    }
+}
+
+.board {
+    margin-top:10px;
+    position:relative;
+}
+
+.desk {
+  background:url(http://www.hapmoore.com/03.01.08/Blanket.box.incision.JPG) no-repeat;
+  bottom:-30px;
+  position:absolute;
+  transform:perspective(1000px) rotateX(45deg) rotateZ(0deg) translateX(15px);
+  transform-style:preserve-3d;
+  width:1000px;
+  height:600px;
+}
+
+$size:400px;
+$sizeOffset: 10px;
+
+.play .checker
+{
+    // only animate when in a play state
+    transition:1s;
+}
+
+.checker
+{
+    position:absolute;
+    font-size:22px;
+    margin-top:15px;
+    margin-left:17px;
+
+    &.error-up, &.error-up *    { animation:up-shake $error-animation }
+    &.error-down, &.error-down *  { animation:down-shake $error-animation }
+    &.error-left  { animation:left-shake $error-animation }
+    &.error-right { animation:right-shake $error-animation }
+
+    .stack {
+        position:absolute;
+        top:0;
+        color:#774444;
+        background-color:#AA4444;
+        width:50px;
+        height:50px;
+        border:5px solid #774444;
+        border-radius:50px;
+        padding-top:7px;
+        text-align:center;
+        
+        &:nth-child(1),
+        &:nth-child(2) {
+            border-color:#552222;
+        }
+    }
+}
+
+@import 'animations';
+@import 'board';

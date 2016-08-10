@@ -1,42 +1,34 @@
 import React from 'react';
-
+import ReactDOM from 'react-dom';
 
 //this exports a reference to a React class as the default export
 export default React.createClass({
-
-    /**
-     * In React state is maintained by the component itself.
-     * @returns {{}} The initial state
-     */
+    
     getInitialState() {
-        return {};
+        let position = Math.floor(Math.random()*4);
+
+        return {
+            moveDirection:position,
+            directionNames:["up","right","down","left"]
+        };
     },
 
-    /**
-     * This must return a JSX element.
-     * @returns {XML}
-     */
     render() {
-        //this will set the CSS style of the div we're returning.
-        //this.props are injected by the entity that instantiated
-        //this react class.
+        if(this.props.gameState === "new") {
+            this.state = this.getInitialState();
+        }
+
         let style = {
             width: this.props.size,
-            height: this.props.size,
-            backgroundColor: this.props.color
-        };
-        //To set a div's class in React you must use the 'className' attribute, instead of the
-        //usual 'class' attribute. This is because 'class' is a reserved keyword in ECMAScript 6.
-        return <div className='square' ref='square' style={style}/>
-    },
+            height: this.props.size
+        };        
 
-    /**
-     * After a component mounts (ie the component is added to the DOM), this
-     * function is called. Here you can get a reference to the DOMElement by
-     * using reacts ref mechanism.
-     */
-    componentDidMount() {
-        //checker is a reference to a DOMElement.
-        let checker = React.findDOMNode(this.refs.square);
+        let squareClass = 
+            "square " + 
+            this.props.color + " " + 
+            this.state.directionNames[this.state.moveDirection] + " " +
+            this.props.className;
+
+        return <div className={squareClass} ref='square' style={style} />
     }
 });

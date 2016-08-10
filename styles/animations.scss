@@ -1,0 +1,48 @@
+
+@-webkit-keyframes up-shake {
+  10% { transform:translate3d(0, -10px, 0)}
+  20%, 40%, 60%, 80% { transform: translate3d(-2px, 0, 0) }
+  30%, 50%, 70%, 90% { transform: translate3d(2px, 0, 0) }
+}
+
+@keyframes up-shake {
+  10% { transform:translate3d(0, -10px, 0)}
+  20%, 40%, 60%, 80% { transform: translate3d(-2px, 0, 0) }
+  30%, 50%, 70%, 90% { transform: translate3d(2px, 0, 0) }
+}
+
+@-webkit-keyframes down-shake {
+  10% { transform:translate3d(0, 10px, 0)}
+  20%, 40%, 60%, 80% { transform: translate3d(-2px, 0, 0) }
+  30%, 50%, 70%, 90% { transform: translate3d(2px, 0, 0) }
+}
+
+@keyframes down-shake {
+  10% { transform:translate3d(0, 10px, 0)}
+  20%, 40%, 60%, 80% { transform: translate3d(-2px, 0, 0) }
+  30%, 50%, 70%, 90% { transform: translate3d(2px, 0, 0) }
+}
+
+@-webkit-keyframes right-shake {
+  10% { transform:translate3d(10px,0,0)}
+  20%, 40%, 60%, 80% { transform:translate3d(-2px, 0, 0) }
+  30%, 50%, 70%, 90% { transform:translate3d(2px, 0, 0) }
+}
+
+@keyframes right-shake {
+  10% { transform:translate3d(10px,0,0)}
+  20%, 40%, 60%, 80% { transform:translate3d(-2px, 0, 0) }
+  30%, 50%, 70%, 90% { transform:translate3d(2px, 0, 0) }
+}
+
+ @-webkit-keyframes left-shake {
+  10% { transform:translate3d(-10px,0,0)}
+  20%, 40%, 60%, 80% { transform:translate3d(-2px, 0, 0) }
+  30%, 50%, 70%, 90% { transform:translate3d(2px, 0, 0) }
+}
+
+ @keyframes left-shake {
+  10% { transform:translate3d(-10px,0,0)}
+  20%, 40%, 60%, 80% { transform:translate3d(-2px, 0, 0) }
+  30%, 50%, 70%, 90% { transform:translate3d(2px, 0, 0) }
+}

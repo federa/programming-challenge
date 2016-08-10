@@ -1,52 +1,100 @@
 //all import statements must go at the top of the file.
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Board from './example-board';
 import Controls from './example-controls';
+import {Button, Modal, FormControl} from 'react-bootstrap';
 
 //get the content DOMElemet create in index.html
 let content = document.getElementById('content');
 
-//This is a React class. It's main methods are 'getInitialState', and 'render'.
 let Main = React.createClass({
-
     getInitialState() {
         return {
             size: this.props.size,
-            squareSize: this.props.squareSize
+            squareSize: this.props.squareSize,
+            gameState : "stop",
+            modalShown: false
         };
     },
-
+    componentDidMount(){
+        this.tick();  
+    },
+    tick() {
+        if (this.state.gameState !== "play") {
+            this.state.gameState = "stop";
+        }
+        
+        this.state.tick = Math.random();
+        this.setState(this.state);
+        requestAnimationFrame(this.tick);
+    },
     render() {
-        return <div>
-            <Controls control={this}/>
-            <Board size={this.state.size} squareSize={this.state.squareSize}/>
+        return <div id="main" className={this.state.gameState}>
+            <div className="desk">
+                <Controls control={this}/>
+                <Board size={this.state.size} 
+                       squareSize={this.state.squareSize} 
+                       gameState={this.state.gameState} 
+                       stop={this.stop}/>
+            </div>
+            <Modal show={this.state.modalShown} onHide={this.hideModal} bsSize="small">
+                <Modal.Header>
+                    <Modal.Title>Set number of rows:</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="modal-body" style={{textAlign:"center"}}>
+                        <FormControl bsSize="sm" type="text" value={this.state.size} onChange={this.setSize}/>
+                        <Button onClick={this.hideModal}>ok</Button>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>;
     },
-
+    
+    showModal(){
+        this.state.modalShown = true;
+        this.setState(this.state);
+    },
+    
+    hideModal(){
+        this.state.modalShown = false;
+        this.setState(this.state);
+    },
+    
+    validate(e){
+        this.state.size = e.target.value;
+    },
+    
     play() {
-        console.log("Play");
+        this.state.gameState = "play";
+        this.setState(this.state);
     },
 
-    stop() {
-        console.log("Stop");
+    stop(setState) {
+        this.state.gameState = "stop";
+        if (setState) {
+            this.setState(this.state);
+        }
     },
 
     reset() {
-        console.log("Reset");
+        this.state.gameState = "reset";
+        this.setState(this.state);
+    },
+    newBoard() {
+        //generate a new board
+        this.state.gameState = "new";
+        this.setState(this.state);
     },
 
-    setSize() {
-        //we update our internal state.
-        this.state.size = 7;
-        //setting our state forces a rerender, which in turn will call the render() method
-        //of this class. This is how everything gets redrawn and how you 'react' to user input
-        //to change the state of the DOM.
+    setSize(evt) {
+        this.state.size = parseInt(evt.target.value);
+
         this.setState(this.state);
     }
 });
 
-//this is the entry point into react. From here on out we deal almost exclusively with the
-//virtual DOM. Here we tell React to attach everything to the content DOM element.
-React.render(<Main squareSize={80} size={5}/>, content, () => {
+ReactDOM.render(<Main squareSize={80} size={5}/>, content, () => {
     console.log("Rendered!");
 });

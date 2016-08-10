@@ -10,7 +10,7 @@ var template = [
         submenu: [
             {
                 label: 'Quit',
-                accelerator: 'Command+Q',
+                accelerator: 'CmdOrCtrl+Q',
                 click: function () {
                     app.quit();
                 }
@@ -22,14 +22,17 @@ var template = [
         submenu: [
             {
                 label: 'Reload',
-                accelerator: 'Command+R',
+                accelerator: 'CmdOrCtrl+R',
                 click: function () {
-                    BrowserWindow.getFocusedWindow().reloadIgnoringCache();
+                    setImmediate(function () {
+                        mainWindow.webContents.reloadIgnoringCache();
+                        //BrowserWindow.getFocusedWindow().reloadIgnoringCache();
+                    });
                 }
             },
             {
                 label: 'Toggle DevTools',
-                accelerator: 'Alt+Command+I',
+                accelerator: 'Alt+CmdOrCtrl+I',
                 click: function () {
                     BrowserWindow.getFocusedWindow().toggleDevTools();
                 }
