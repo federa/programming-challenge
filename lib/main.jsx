@@ -14,7 +14,8 @@ let Main = React.createClass({
             size: this.props.size,
             squareSize: this.props.squareSize,
             gameState : "stop",
-            modalShown: false
+            modalShown: false,
+            promptSize: this.props.size
         };
     },
     componentDidMount(){
@@ -44,7 +45,7 @@ let Main = React.createClass({
                 </Modal.Header>
                 <Modal.Body>
                     <div className="modal-body" style={{textAlign:"center"}}>
-                        <FormControl bsSize="sm" type="text" value={this.state.size} onChange={this.setSize}/>
+                        <FormControl bsSize="sm" type="text" value={this.state.promptSize} onChange={this.setSize}/>
                         <Button onClick={this.hideModal}>ok</Button>
                     </div>
                 </Modal.Body>
@@ -59,6 +60,7 @@ let Main = React.createClass({
     
     hideModal(){
         this.state.modalShown = false;
+        this.state.size = this.state.promptSize;
         this.setState(this.state);
     },
     
@@ -89,7 +91,7 @@ let Main = React.createClass({
     },
 
     setSize(evt) {
-        this.state.size = parseInt(evt.target.value);
+        this.state.promptSize = parseInt(evt.target.value);
 
         this.setState(this.state);
     }

@@ -200,7 +200,7 @@ export default React.createClass({
             }
         }
         
-        return <div className="cube">
+        return <div className={"cube board" + this.props.size}>
             <div className="front face"></div>
             <div className="side face"></div>
             <div className="grid face" style={style}>
